@@ -24,9 +24,11 @@ const LoginPage = () => {
     const onLogin = useCallback(async (values: ILoginParams) => {
         setErrorMessage("");
         setLoading(true)
+
         const json = await dispatch(
             fetchThunk(API_PATHS.signIn, 'post', { email: values.email, password: values.password }),
         );
+
         setLoading(false);
 
         if (json?.code === RESPONSE_STATUS_SUCCESS) {
@@ -35,10 +37,10 @@ const LoginPage = () => {
             dispatch(replace(ROUTES.home));
             return;
         }
+        
         setErrorMessage(getErrorMessageResponse(json));
-
     }, [dispatch])
-    return (<Grid container
+    return ( <Grid container
         direction="row"
         justifyContent="center"
         alignItems="center"

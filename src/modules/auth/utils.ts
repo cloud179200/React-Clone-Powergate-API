@@ -12,35 +12,25 @@ const validateEmail = (email: string) => {
 
     return '';
 };
-const validateName = (name: string) => {
-    if(!name){
-        return "nameRequire";
+const validateField = (field: string, value:string) => {
+    let fieldRequire = '';
+    switch (field) {
+        case "name":
+            fieldRequire  = !value ?"nameRequire":""
+            break;
+        case "gender":
+            fieldRequire = !value ? "genderRequire" : value!=="male" && value!=="female" ? "genderInvalid":""
+            break;
+        case "region":
+            fieldRequire = !value ?"regionRequire" :""
+            break;
+        case "state":
+            fieldRequire = !value ? "stateRequire":""
+            break;
     }
+    return fieldRequire
+}
 
-    return ''
-}
-const validateGender = (gender: string) => {
-    if(!gender){
-        return 'genderRequire';
-    }
-    if(gender !== "male" && gender !== "female"){
-        return "genderInvalid"
-    }
-    return ''
-}
-const validateRegion = (region: string) => {
-    if(!region){
-        return "regionRequire"
-    }
-   
-    return ''
-}
-const validateState = (state: string) => {
-    if(!state){
-        return "stateRequire"
-    }
-    return ''
-}
 const validatePassword = (password: string) => {
     if (!password) {
         return 'passwordRequire';
@@ -50,6 +40,19 @@ const validatePassword = (password: string) => {
         return 'minPasswordInvalid';
     }
 
+    return '';
+};
+const validateConfirmPassword = (password: string, confirmPassword: string) => {
+    if (!confirmPassword) {
+        return 'passwordRequire';
+    }
+
+    if (password.length < 4) {
+        return 'minPasswordInvalid';
+    }
+    if(password !== confirmPassword){
+        return 'matchPasswordInvalid'
+    }
     return '';
 };
 
@@ -67,11 +70,11 @@ export const validateRegister = (values: IRegisterParams): IRegisterValidation =
     return {
         email: validateEmail(values.email),
         password: validatePassword(values.password),
-        confirmPassword: validatePassword(values.confirmPassword),
-        name:validateName(values.name),
-        gender:validateGender(values.gender),
-        region:validateRegion(values.region),
-        state: validateState(values.state)
+        confirmPassword: validateConfirmPassword(values.password, values.confirmPassword),
+        name:validateField("name", values.name),
+        gender:validateField("gender",values.gender),
+        region:validateField("region",values.region),
+        state: validateField("state",values.state)
     };
 };
 

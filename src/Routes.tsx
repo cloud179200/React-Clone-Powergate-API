@@ -11,7 +11,6 @@ const RegisterPage = lazy(() => import('./modules/auth/pages/RegisterPage'));
 const HomePage = lazy(() => import("./modules/home/pages/HomePage"))
 const ContactPage = lazy(() => import("./modules/home/pages/ContactPage"))
 
-interface Props { }
 const LoadingPage = () => (<Grid container
     direction="row"
     justifyContent="center"
@@ -19,7 +18,8 @@ const LoadingPage = () => (<Grid container
     <CircularProgress />
 </Grid>
 )
-const RouteS = (props: Props) => {
+interface Props { }
+export const Routes = (props: Props) => {
     const location = useLocation()
     return (
         <Suspense fallback={<LoadingPage />}>
@@ -33,4 +33,4 @@ const RouteS = (props: Props) => {
         </Suspense>
     )
 }
-export default RouteS
+

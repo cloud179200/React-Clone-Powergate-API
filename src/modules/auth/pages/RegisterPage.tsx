@@ -27,6 +27,7 @@ const RegisterPage = () => {
             setLocations(json.data)
             return;
         }
+
         setErrorMessage(getErrorMessageResponse(json));
     }, [dispatch])
 
@@ -34,18 +35,21 @@ const RegisterPage = () => {
         getLocations()
     }, [getLocations])
 
-    const getCapitals = useCallback(async (pid: number): Promise<void> => {
-        const json = await dispatch(fetchThunk(`${API_PATHS.location}${pid}`, "get"))
+    const getCapitals = useCallback(async (pid: number | string): Promise<void> => {
+        const json = await dispatch(fetchThunk(`${API_PATHS.location}?pid=${pid}`, "get"))
+
         if (json?.code === RESPONSE_STATUS_SUCCESS) {
             setCapitals(json.data)
             return;
         }
+
         setErrorMessage(getErrorMessageResponse(json));
     }, [dispatch])
 
     const onRegister = useCallback(async (values: IRegisterParams) => {
         setErrorMessage("");
         setLoading(true)
+
         const json = await dispatch(fetchThunk(API_PATHS.signUp, "post", { email: values.email, password: values.password, repeatPassword: values.confirmPassword, name: values.name, gender: values.gender, region: +values.region, state: +values.state }))
         setLoading(false);
 
@@ -53,10 +57,11 @@ const RegisterPage = () => {
             dispatch(replace(ROUTES.login));
             return;
         }
+
         setErrorMessage(getErrorMessageResponse(json));
     }, [dispatch])
 
-    return (<Grid container
+    return ( <Grid container
         direction="row"
         justifyContent="center"
         alignItems="center"

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import Routes  from './Routes';
+import {Routes}  from './Routes';
 import Cookies from 'js-cookie';
 import { ACCESS_TOKEN_KEY } from './utils/constants';
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,7 +29,7 @@ function App() {
     }
   }, [dispatch, user]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getProfile();
   }, [getProfile]);
 

@@ -22,7 +22,7 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ConnectedRouter history={history}>
-          <ConnectedIntlProvider>
+          <ConnectedIntlProvider defaultLocale='vi'>
             <App />
           </ConnectedIntlProvider>
         </ConnectedRouter>

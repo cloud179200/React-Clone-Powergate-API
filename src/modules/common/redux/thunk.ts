@@ -39,6 +39,5 @@ export function fetchThunk(
     } catch (error) {
       console.log(error)
     }
-   
   };
 }

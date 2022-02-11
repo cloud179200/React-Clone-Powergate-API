@@ -3,6 +3,7 @@ import { ILoginParams, ILoginValidation } from "../../../models/auth";
 import { validateLogin, validLogin } from "../utils";
 import { Box, TextField, Alert, FormControlLabel, Switch, Button } from "@mui/material"
 import { LoadingButton } from "@mui/lab"
+import {FormattedMessage} from "react-intl"
 interface Props {
     onLogin(values: ILoginParams): void;
     loading: boolean;
@@ -14,7 +15,6 @@ const LoginForm = (props: Props) => {
     const [validate, setValidate] = useState<ILoginValidation>()
     const submit = useCallback((e: any) => {
         e.preventDefault();
-        console.log(formValues)
         const validate = validateLogin(formValues);
 
         setValidate(validate);
@@ -28,29 +28,27 @@ const LoginForm = (props: Props) => {
         <Box component="form" width={1} maxWidth={"600px"} p={3} autoComplete="off" sx={{ display: "flex", flexDirection: "column", '& .MuiTextField-root': { width: '100%', pb: 2 }, '& .MuiFormControl-root': { pb: 2 }, "& .MuiAlert-root":{mb:2} }} noValidate onSubmit={submit}>
             <TextField
                 required
-                label={!!validate?.email ? "Please enter a valid email address" : "Email"}
+                label={!!validate?.email ? <FormattedMessage id={validate.email} /> : <FormattedMessage id="email" />}
                 type="email"
-                placeholder="Email..."
                 error={!!validate?.email}
                 value={formValues.email}
                 onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
             />
             <TextField
                 required
-                label={!!validate?.password ? "Please enter a valid password" : "Password"}
+                label={!!validate?.password ? <FormattedMessage id={validate.password} /> : <FormattedMessage id="password" />}
                 type="password"
-                placeholder="Password..."
                 autoComplete="on"
                 error={!!validate?.password}
                 value={formValues.password}
                 onChange={(e) => setFormValues({ ...formValues, password: e.target.value })}
             />
 
-            <FormControlLabel control={<Switch checked={formValues.rememberMe} onChange={(e) => setFormValues({ ...formValues, rememberMe: !formValues.rememberMe })}/>} label="Remember me?" />
+            <FormControlLabel control={<Switch checked={formValues.rememberMe} onChange={(e) => setFormValues({ ...formValues, rememberMe: !formValues.rememberMe })}/>} label={<FormattedMessage id="rememberMe" />} />
             {errorMessage !== "" && <Alert severity="error">{errorMessage}</Alert>}
             <Box width={1} display="flex" justifyContent="space-between" alignItems="center">
-                <LoadingButton variant="outlined" size="large" type="submit" loading={loading}>Login</LoadingButton>
-                <Button variant="text" href="/register">Don't have account?</Button>
+                <LoadingButton variant="outlined" size="large" type="submit" loading={loading}><FormattedMessage id="login"/></LoadingButton>
+                <Button variant="text" href="/register"><FormattedMessage id="donthaveanaccount"/></Button>
             </Box>
         </Box>)
 }
