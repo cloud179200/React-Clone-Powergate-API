@@ -22,5 +22,7 @@
   "alreadyhaveanaccount":"Đã có tài khoản ?",
   "donthaveanaccount":"Chưa có tài khoản ?",
   "male":"Nam",
-  "female":"Nữ"
+  "female":"Nữ",
+  "User with this email has already existed":"Người dùng gán với địa chỉ email này đã tồn tại",
+  "Invalid username / password":"Địa chỉ email / mật khẩu không chính xác"
 }

@@ -45,7 +45,7 @@ const LoginForm = (props: Props) => {
             />
 
             <FormControlLabel control={<Switch checked={formValues.rememberMe} onChange={(e) => setFormValues({ ...formValues, rememberMe: !formValues.rememberMe })}/>} label={<FormattedMessage id="rememberMe" />} />
-            {errorMessage !== "" && <Alert severity="error">{errorMessage}</Alert>}
+            {errorMessage !== "" && <Alert severity="error"><FormattedMessage id={errorMessage}/></Alert>}
             <Box width={1} display="flex" justifyContent="space-between" alignItems="center">
                 <LoadingButton variant="outlined" size="large" type="submit" loading={loading}><FormattedMessage id="login"/></LoadingButton>
                 <Button variant="text" href="/register"><FormattedMessage id="donthaveanaccount"/></Button>

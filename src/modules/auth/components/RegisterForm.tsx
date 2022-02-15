@@ -94,7 +94,7 @@ const RegisterForm = (props: Props) => {
                     {capitals.map(item => <MenuItem key={item.name} value={item.id}>{item.name}</MenuItem>)}
                 </Select>
             </FormControl>}
-            {errorMessage !== "" && <Alert severity="error">{errorMessage}</Alert>}
+            {errorMessage !== "" && <Alert severity="error"><FormattedMessage id={errorMessage}/></Alert>}
             <Box width={1} display="flex" justifyContent="space-between" alignItems="center">
                 <LoadingButton variant="outlined" size="large" type="submit" loading={loading}><FormattedMessage id="register" /></LoadingButton>
                 <Button variant="text" href="/login"><FormattedMessage id="alreadyhaveanaccount" /></Button>
