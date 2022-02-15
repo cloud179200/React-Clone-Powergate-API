@@ -37,7 +37,7 @@ const CustomListItem = (props: Props) => {
                     {isLabel ?
                         <Typography sx={{ padding: "16.5px 14px", border: "1px solid", borderRadius: 1, height: "1.4375em", transition: "all 0.1s ease-out", "&:hover": { outline: `2px solid ${blue["700"]}`, cursor: "text" } }} variant="body1" component="label" onClick={() => setIsLabel(false)}>
                             {value}</Typography> :
-                        <TextField inputRef={inputRef} sx={{ width: "100%" }} multiline={multilineTitle} maxRows={4} type="text" autoComplete="off" value={value} onChange={handleOnChange} onBlur={(e) => setIsLabel(true)} />}
+                        <TextField inputRef={inputRef} sx={{ width: "100%" }} multiline={multilineTitle} maxRows={4} type="text" autoComplete="off" value={value} onChange={handleOnChange} onFocus={(e) => e.target.selectionStart = e.target.selectionEnd = e.target.value.length} onBlur={(e) => setIsLabel(true)} />}
                 </CardContent>
                 <CardMedia
                     sx={{ width: 150 }}

@@ -26,7 +26,7 @@ const TutorPage = (props: Props) => {
         const json = await dispatch(fetchThunk(API_PATHS.photo));
         setLoading(false)
         if (json) {
-            dispatch(setPhotos(json.slice(0, 100)))
+            dispatch(setPhotos(json.slice(0, 1000)))
         }
     }, [dispatch])
 
