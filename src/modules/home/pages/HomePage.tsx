@@ -23,6 +23,9 @@ const HomePage = (props: Props) => {
   const handleMoveToTutorial = useCallback(e => {
     dispatch(replace(ROUTES.tutorial))
   }, [dispatch])
+  const handleMoveToUserDetail = useCallback(e => {
+    dispatch(replace(ROUTES.userdetail))
+  }, [dispatch])
   return <Grid container direction="row"
     justifyContent="center"
     alignItems="center"
@@ -33,6 +36,7 @@ const HomePage = (props: Props) => {
       alignItems="center" width={1} maxWidth="600px" p={2} sx={{ border: `2px solid ${blue["A200"]}`, borderRadius: "20px" }} columns={12}>
       <Button variant='outlined' onClick={handleLogout}>Logout</Button>
       <Button variant='outlined' onClick={handleMoveToTutorial}>Move to tutorial</Button>
+      <Button variant='outlined' onClick={handleMoveToUserDetail}>Move to user detail</Button>
     </Grid>
   </Grid>;
 };

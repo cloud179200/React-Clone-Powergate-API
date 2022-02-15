@@ -4,7 +4,7 @@ import { lazy } from "react"
 import { ROUTES } from "./configs/routes"
 import { CircularProgress, Grid } from "@mui/material";
 import ProtectedRoute from "./modules/common/components/ProtectedRouter";
-import PublicRoute from "./modules/common/components/PublicRoute";
+import AuthRoute from "./modules/common/components/AuthRoute";
 
 const AuthPage = lazy(() => import("./modules/auth/pages/AuthPage"));
 const LoginPage = lazy(() => import('./modules/auth/pages/LoginPage'));
@@ -12,6 +12,7 @@ const RegisterPage = lazy(() => import('./modules/auth/pages/RegisterPage'));
 const HomePage = lazy(() => import("./modules/home/pages/HomePage"))
 const ContactPage = lazy(() => import("./modules/home/pages/ContactPage"))
 const TutorPage = lazy(() => import("./modules/home/pages/TutorPage"))
+const UserDetailPage = lazy(() => import("./modules/home/pages/UserDetailPage"))
 
 const LoadingPage = () => (<Grid container
     direction="row"
@@ -27,12 +28,13 @@ export const Routes = (props: Props) => {
         <Suspense fallback={<LoadingPage />}>
             <Switch location={location}>
                 
-                <PublicRoute path={ROUTES.login} component={LoginPage} />
-                <PublicRoute path={ROUTES.register} component={RegisterPage} />
+                <AuthRoute path={ROUTES.login} component={LoginPage} />
+                <AuthRoute path={ROUTES.register} component={RegisterPage} />
                 <ProtectedRoute path={ROUTES.home} component={HomePage} />
                 <ProtectedRoute path={ROUTES.tutorial} component={TutorPage}/>
+                <ProtectedRoute path={ROUTES.userdetail} component={UserDetailPage}/>
                 <Route path={ROUTES.contact} component={ContactPage} />
-                <PublicRoute path="/" component={AuthPage} />
+                <AuthRoute path="/" component={AuthPage} />
             </Switch>
         </Suspense>
     )
