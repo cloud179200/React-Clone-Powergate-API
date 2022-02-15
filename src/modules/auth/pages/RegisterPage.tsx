@@ -49,7 +49,6 @@ const RegisterPage = () => {
     const onRegister = useCallback(async (values: IRegisterParams) => {
         setErrorMessage("");
         setLoading(true)
-
         const json = await dispatch(fetchThunk(API_PATHS.signUp, "post", { email: values.email, password: values.password, repeatPassword: values.confirmPassword, name: values.name, gender: values.gender, region: +values.region, state: +values.state }))
         setLoading(false);
 

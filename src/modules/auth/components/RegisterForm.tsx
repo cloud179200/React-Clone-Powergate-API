@@ -75,7 +75,7 @@ const RegisterForm = (props: Props) => {
             <FormControl fullWidth error={!!validate?.region}><InputLabel>{<FormattedMessage id={!!validate?.region ? validate.region : "region"} />}</InputLabel>
                 <Select
                     value={formValues.region}
-                    label={<FormattedMessage id={!!validate?.state ? validate.region : "region"} />}
+                    label={<FormattedMessage id={!!validate?.region ? validate.region : "region"} />}
                     onChange={async (e) => {
                         setFormValues({ ...formValues, region: e.target.value, state: "" })
                         await getCapitals(+e.target.value)
@@ -85,7 +85,6 @@ const RegisterForm = (props: Props) => {
             </FormControl>
             {capitals.length > 0 && <FormControl fullWidth error={!!validate?.state}><InputLabel>{ <FormattedMessage id={!!validate?.state ? validate.state: "state"} />}</InputLabel>
                 <Select
-
                     value={formValues.state}
                     label={ <FormattedMessage id={!!validate?.state ? validate.state :"state"} />}
                     onChange={(e) => {
