@@ -1,4 +1,4 @@
-import { faFemale, faMale, faMars, faVenus } from "@fortawesome/free-solid-svg-icons";
+import { faMars, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Button, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from "@mui/material";
 import { blue, brown, pink } from "@mui/material/colors";

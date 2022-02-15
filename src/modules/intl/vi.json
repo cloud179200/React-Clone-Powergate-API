@@ -15,7 +15,7 @@
   "region":"Quốc gia",
   "state":"Tỉnh",
   "matchPasswordInvalid":"Xác nhận mật khẩu không khớp",
-  "nameRequỉe":"Họ và tên không được để trống",
+  "nameRequire":"Họ và tên không được để trống",
   "genderRequire":"Giới tính không được để trống",
   "regionRequire":"Quốc gia không được để trống",
   "stateRequire":"Tỉnh không được để trống",

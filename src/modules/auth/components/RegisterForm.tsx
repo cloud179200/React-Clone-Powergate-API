@@ -32,7 +32,7 @@ const RegisterForm = (props: Props) => {
         <Box component="form" width={1} maxWidth={"600px"} p={3} autoComplete="off" sx={{ display: "flex", flexDirection: "column", '& .MuiTextField-root': { width: '100%', pb: 2 }, '& .MuiFormControl-root': { pb: 2 }, "& .MuiAlert-root": { mb: 2 } }} noValidate onSubmit={submit}>
             <TextField
                 required
-                label={!!validate?.email ? <FormattedMessage id={validate.email} /> : <FormattedMessage id="email" />}
+                label={<FormattedMessage id={!!validate?.email ? validate.email : "email"} />}
                 type="email"
                 error={!!validate?.email}
                 value={formValues.email}
@@ -40,7 +40,7 @@ const RegisterForm = (props: Props) => {
             />
             <TextField
                 required
-                label={!!validate?.name ? <FormattedMessage id={validate.name} /> : <FormattedMessage id="name" />}
+                label={<FormattedMessage id={!!validate?.name ? validate.name : "name"} />}
                 type="text"
                 error={!!validate?.name}
                 value={formValues.name}
@@ -48,14 +48,14 @@ const RegisterForm = (props: Props) => {
             />
             <TextField
                 required
-                label={!!validate?.password ? <FormattedMessage id={validate.password} /> : <FormattedMessage id="password" />}
+                label={<FormattedMessage id={!!validate?.password ? validate.password : "password"} />}
                 type="password"
                 error={!!validate?.password}
                 value={formValues.password}
                 onChange={(e) => setFormValues({ ...formValues, password: e.target.value })}
             />  <TextField
                 required
-                label={!!validate?.confirmPassword ? <FormattedMessage id={validate.confirmPassword} /> : <FormattedMessage id="repeatPassword" />}
+                label={<FormattedMessage id={!!validate?.confirmPassword ? validate.confirmPassword : "repeatPassword"} />}
                 type="password"
                 error={!!validate?.confirmPassword}
                 value={formValues.confirmPassword}
@@ -72,10 +72,10 @@ const RegisterForm = (props: Props) => {
                     <FormControlLabel value="female" control={<Radio />} label={<FormattedMessage id="female" />} />
                 </RadioGroup>
             </FormControl>
-            <FormControl fullWidth error={!!validate?.region}><InputLabel>{!!validate?.region ? <FormattedMessage id={validate.region} /> : <FormattedMessage id="region" />}</InputLabel>
+            <FormControl fullWidth error={!!validate?.region}><InputLabel>{<FormattedMessage id={!!validate?.region ? validate.region : "region"} />}</InputLabel>
                 <Select
                     value={formValues.region}
-                    label={!!validate?.state ? <FormattedMessage id={validate.region} /> : <FormattedMessage id="region" />}
+                    label={<FormattedMessage id={!!validate?.state ? validate.region : "region"} />}
                     onChange={async (e) => {
                         setFormValues({ ...formValues, region: e.target.value, state: "" })
                         await getCapitals(+e.target.value)
@@ -83,11 +83,11 @@ const RegisterForm = (props: Props) => {
                     {locations.map(item => <MenuItem key={item.name} value={item.id}>{item.name}</MenuItem>)}
                 </Select>
             </FormControl>
-            {capitals.length > 0 && <FormControl fullWidth error={!!validate?.state}><InputLabel>{!!validate?.state ? <FormattedMessage id={validate.state} /> : <FormattedMessage id="state" />}</InputLabel>
+            {capitals.length > 0 && <FormControl fullWidth error={!!validate?.state}><InputLabel>{ <FormattedMessage id={!!validate?.state ? validate.state: "state"} />}</InputLabel>
                 <Select
 
                     value={formValues.state}
-                    label={!!validate?.state ? <FormattedMessage id={validate.state} /> : <FormattedMessage id="state" />}
+                    label={ <FormattedMessage id={!!validate?.state ? validate.state :"state"} />}
                     onChange={(e) => {
                         setFormValues({ ...formValues, state: e.target.value })
                     }}>
