@@ -9,7 +9,7 @@ import PayrollDataTable from "../components/PayrollDataTable"
 import Filter from "../components/Filter"
 import { setPayroll } from "../redux/dataReducer"
 import { ExportReactCSV } from "../components/ExportCSV"
-import { getStatus } from "../utils"
+import { getCSVFormatted, getStatus } from "../utils"
 import UpdatePayrollDetailForm from "../components/PayrollDetailUpdateForm"
 interface Props { }
 interface IModal {
@@ -112,13 +112,13 @@ const DataTablePage = (props: Props) => {
         newPayrollDetails = newPayrollDetails.filter((payrollDetail) => payrollDetail.payroll_id !== payroll_id)
         newPayroll.payrolls = newPayrollDetails
         dispatch(setPayroll(newPayroll))
-        setModal({...modal, openDelete:false, targetPayrollDetail:null})
+        setModal({ ...modal, openDelete: false, targetPayrollDetail: null })
     }, [dispatch, payroll, modal])
     const updatePayrollDetail = useCallback(async (payrollDetail: IPayrollDetail) => {
         if (!payroll) {
             return
         }
-        
+
         setClonePayroll((prevClonePayroll) => {
             if (!prevClonePayroll) {
                 return prevClonePayroll
@@ -209,7 +209,7 @@ const DataTablePage = (props: Props) => {
                             textDecoration: "none"
                         }
                     }}>
-                        {clonePayroll ? <ExportReactCSV csvData={clonePayroll.payrolls} fileName="data.csv" /> : "ExportCSV"}
+                        {clonePayroll ? <ExportReactCSV csvData={getCSVFormatted(clonePayroll)} fileName="data.csv" /> : "ExportCSV"}
                     </Button>
                 </Grid>
                 <Grid container columns={12} mt={2} mb={2} justifyContent="space-between" alignItems="center">

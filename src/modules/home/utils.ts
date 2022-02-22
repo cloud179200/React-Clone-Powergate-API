@@ -81,7 +81,21 @@ export const getPageInfo = (payroll: IPayroll | undefined, page: number, recordP
 
     return pageInfo
 }
-
+export const getCSVFormatted = (payroll: IPayroll) => {
+    const result = [...payroll.payrolls].map(item =>{ 
+        const status = getStatus(item).status
+        const date = new Date(item.time_created)
+        const currency = item.currency
+        const total = item.volume_input_in_input_currency + item.fees
+        const order = item.payroll_id
+            return {status, 
+            date, 
+            currency, 
+            total, 
+            order}
+        })
+    return result
+}
 const validateStatus = (status: string) => {
     const statuses = [...LIST_STATUS_INVOICE_HISTORY, ""]
     if(statuses.indexOf(status) === -1){

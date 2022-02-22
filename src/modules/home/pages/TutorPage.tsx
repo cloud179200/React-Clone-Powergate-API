@@ -21,6 +21,7 @@ const TutorPage = (props: Props) => {
     const { photos } = useSelector((state: AppState) => ({
         photos: state.data.photos,
     }))
+    const isPhotosChanged = JSON.stringify(photos) !== JSON.stringify(clonePhotos)
     const getPhotos = useCallback(async () => {
         setLoading(true)
         const json = await dispatch(fetchThunk(API_PATHS.photo));
@@ -34,11 +35,12 @@ const TutorPage = (props: Props) => {
         getPhotos()
     }, [getPhotos])
 
-    const setPhotoTitle = useCallback((index: number, value: string) => {
+    const setPhotoTitle = useCallback((id: number, value: string) => {
         setClonePhotos((prevState) => {
             const newPhotosByTutorComponent = Array.from(prevState);
-            const newPhoto = { ...newPhotosByTutorComponent[index], title: value }
-            newPhotosByTutorComponent[index] = newPhoto
+            const indexToUpdate = newPhotosByTutorComponent.findIndex(item => item.id === id)
+            const newPhoto = { ...newPhotosByTutorComponent[indexToUpdate], title: value }
+            newPhotosByTutorComponent[indexToUpdate] = newPhoto
             return newPhotosByTutorComponent
         })
     }, [])
@@ -65,14 +67,14 @@ const TutorPage = (props: Props) => {
             <Grid container direction="row" justifyContent="flex-end" alignItems="center" columns={12}>
                 <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2}>
                     <Button variant="outlined" onClick={handleBackHome}>Back Home</Button>
-                    <Button disabled={JSON.stringify(photos) === JSON.stringify(clonePhotos)} variant="outlined" onClick={handleConfirm}>Confirm</Button>
-                    <Button disabled={JSON.stringify(photos) === JSON.stringify(clonePhotos)} variant="outlined" onClick={handleReset}>Reset</Button>
+                    <Button disabled={!isPhotosChanged} variant="outlined" onClick={handleConfirm}>Confirm</Button>
+                    <Button disabled={!isPhotosChanged} variant="outlined" onClick={handleReset}>Reset</Button>
                 </Stack>
             </Grid>
             <Grid container direction="row" justifyContent="center" p={loading ? 4 : 0} alignItems="center" columns={12}>
                 {loading ? <CircularProgress /> : <List sx={{ width: "100%" }}>
                     {clonePhotos?.map((item, index) =>
-                            <CustomListItem {...item} key={index.toString()} index={index} multilineTitle={true} value={item.title} setPhotoTitle={setPhotoTitle} />
+                            <CustomListItem {...item} key={index.toString()} multilineTitle={true} value={item.title} setPhotoTitle={setPhotoTitle} />
                     )}
                 </List>}
             </Grid>
