@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { IPayrollDetail } from "../../../models/data"
 import { getStatus, validateUpdatePayrollDetail, validUpdatePayrollDetail } from "../utils";
 import { IFormUpdatePayrollDetailValues, IFormUpdatePayrollDetailValuesValidation } from "../../../models/data"
+import { LIST_STATUS_INVOICE_HISTORY } from "../../../utils/constants";
 interface Props {
     onUpdatePayrollDetail: (values: IPayrollDetail) => void;
     payrollDetail: IPayrollDetail;
@@ -21,7 +22,7 @@ const UpdatePayrollDetailForm = (props: Props) => {
     const [formValues, setFormValues] = useState<IFormUpdatePayrollDetailValues>({ status: "", currency: "", date: new Date(), amount: 0, fees: 0, order: "" })
     const [clonePayrollDetail, setClonePayrollDetail] = useState<IPayrollDetail>()
     const [validate, setValidate] = useState<IFormUpdatePayrollDetailValuesValidation>()
-    const statuses = ["Pending", "Received", "Matched", "Processing", "Fulfilled", "Canceled"]
+    const statuses = LIST_STATUS_INVOICE_HISTORY
 
     const submit = useCallback((e: any) => {
         e.preventDefault();

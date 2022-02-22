@@ -1,5 +1,6 @@
 import { blue, green, orange, purple, red } from "@mui/material/colors";
 import { IFilter, IFilterValidation, IFormUpdatePayrollDetailValues, IFormUpdatePayrollDetailValuesValidation, IPayroll, IPayrollDetail } from "../../models/data";
+import { LIST_STATUS_INVOICE_HISTORY } from "../../utils/constants";
 
 export const getStatus = (payrollDetail: IPayrollDetail) => {
     let status = "";
@@ -82,7 +83,7 @@ export const getPageInfo = (payroll: IPayroll | undefined, page: number, recordP
 }
 
 const validateStatus = (status: string) => {
-    const statuses = ["Pending", "Received", "Matched", "Processing", "Fulfilled", "Canceled", ""]
+    const statuses = [...LIST_STATUS_INVOICE_HISTORY, ""]
     if(statuses.indexOf(status) === -1){
         return "statusInvalid"
     }
@@ -114,7 +115,7 @@ const validateUpdateFormValues = (column:"status"|"currency"|"date"|"amount"|"fe
     let validate = ''
     switch (column) {
         case "status":
-            const statuses = ["Pending", "Received", "Matched", "Processing", "Fulfilled", "Canceled"]
+            const statuses = LIST_STATUS_INVOICE_HISTORY
             if(statuses.indexOf(values.status) === -1){
                 validate = "statusInvalid"
             }

@@ -3,7 +3,7 @@ export const development: boolean = !process.env.NODE_ENV || process.env.NODE_EN
 export const APIHost = development ? 'http://api.training.div3.pgtest.co/api/v1' : 'https://google.com';
 
 export const ACCESS_TOKEN_KEY = 'token';
-
+export const LIST_STATUS_INVOICE_HISTORY = ["Pending", "Received", "Matched", "Processing", "Fulfilled", "Canceled"]
 export const LIST_PAYROLL = {
     company_id: "4701532030654152",
     from_date: null,

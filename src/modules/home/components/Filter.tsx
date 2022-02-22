@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { IFilter, IFilterValidation } from "../../../models/data"
 import { validateFilter, validFilter } from "../utils";
 import { FormattedMessage } from "react-intl"
+import { LIST_STATUS_INVOICE_HISTORY } from "../../../utils/constants";
 
 interface Props {
     onApply: (filter: IFilter) => void;
@@ -14,7 +15,7 @@ const Filter = (props: Props) => {
     const { onApply, onClear } = props;
     const [validate, setValidate] = useState<IFilterValidation>()
     const [filter, setFilter] = useState<IFilter>({ status: "", from: new Date(), to: new Date(new Date().setDate(new Date().getDate() + 1)), order: "" })
-    const statuses = ["Pending", "Received", "Matched", "Processing", "Fulfilled", "Canceled"]
+    const statuses = LIST_STATUS_INVOICE_HISTORY
     const handleApply = (e: any) => {
         const validate = validateFilter(filter);
         setValidate(validate);
