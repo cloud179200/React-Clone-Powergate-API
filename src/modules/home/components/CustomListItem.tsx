@@ -24,7 +24,7 @@ const CustomListItem = (props: Props) => {
             inputRef.current?.setAttribute("value", value)
         }
         return () => { mouted = false }
-    }, [isLabel])
+    }, [isLabel, value])
     return <LazyLoad key={id.toString()} placeholder={<Grid container p={4} columns={12} justifyContent="center" alignItems="center"><CircularProgress /></Grid>}>
         <ListItem sx={{ backgroundColor: id % 2 === 0 ? grey["500"] : "white" }} >
             <ListItemAvatar>

@@ -77,13 +77,33 @@ const PayrollDataTable = (props: Props) => {
             return { by: column, reverse: false }
         })
     }
-    useEffect(() => {
-        if(!payroll){
-            return
+    const getButtonEndIcon = (column:string,sortBy: string, reverse: boolean) => {
+        let resultComponent = <></>
+        const isSortByThisColumn = sortOptions.by === column
+        switch (sortBy) {
+            case "status":
+                if (isSortByThisColumn) resultComponent = <FontAwesomeIcon icon={reverse ? faSortAlphaUp : faSortAlphaDown} />
+                break;
+            case "date":
+                if (isSortByThisColumn) resultComponent = <FontAwesomeIcon icon={reverse ? faSortUp : faSortDown} />
+                break;
+            case "currency":
+                if (isSortByThisColumn) resultComponent = <FontAwesomeIcon icon={reverse ? faSortAlphaUp : faSortAlphaDown} />
+                break;
+            case "total":
+                if (isSortByThisColumn) resultComponent = <FontAwesomeIcon icon={reverse ? faSortUp : faSortDown} />
+                break;
+            case "order":
+                if (isSortByThisColumn) resultComponent = <FontAwesomeIcon icon={reverse ? faSortAlphaUp : faSortAlphaDown} />
+                break;
+            default:
+                break;
         }
-        const TotalPage = getTotalPage([...payroll.payrolls].length, recordsPerPage)
-        if(page > TotalPage){
-            setPage(TotalPage)
+        return resultComponent
+    }
+    useEffect(() => {
+        if (!payroll) {
+            return
         }
     }, [payroll])
 
@@ -94,11 +114,11 @@ const PayrollDataTable = (props: Props) => {
                 <StyledTable sx={{ minWidth: 700 }}>
                     <TableHead>
                         <TableRow sx={{ display: "flex" }}>
-                            <StyledTableCell align='left'><StyledButton endIcon={sortOptions.by === "status" && <FontAwesomeIcon icon={sortOptions.reverse ? faSortAlphaUp : faSortAlphaDown} />} onClick={(e) => handleSortByColumn("status")}><FormattedMessage id="status" /></StyledButton></StyledTableCell>
-                            <StyledTableCell align="left"><StyledButton endIcon={sortOptions.by === "date" && <FontAwesomeIcon icon={sortOptions.reverse ? faSortUp : faSortDown} />} onClick={(e) => handleSortByColumn("date")}><FormattedMessage id="date" /></StyledButton></StyledTableCell>
-                            <StyledTableCell align="left"><StyledButton endIcon={sortOptions.by === "currency" && <FontAwesomeIcon icon={sortOptions.reverse ? faSortAlphaUp : faSortAlphaDown} />} onClick={(e) => handleSortByColumn("currency")} ><FormattedMessage id="currency" /></StyledButton></StyledTableCell>
-                            <StyledTableCell align="left"><StyledButton endIcon={sortOptions.by === "total" && <FontAwesomeIcon icon={sortOptions.reverse ? faSortUp : faSortDown} />} onClick={(e) => handleSortByColumn("total")}><FormattedMessage id="total" /></StyledButton></StyledTableCell>
-                            <StyledTableCell align="left"><StyledButton endIcon={sortOptions.by === "order" && <FontAwesomeIcon icon={sortOptions.reverse ? faSortAlphaUp : faSortAlphaDown} />} onClick={(e) => handleSortByColumn("order")}><FormattedMessage id="order" /></StyledButton></StyledTableCell>
+                            <StyledTableCell align='left'><StyledButton endIcon={getButtonEndIcon("status",sortOptions.by, sortOptions.reverse)} onClick={(e) => handleSortByColumn("status")}><FormattedMessage id="status" /></StyledButton></StyledTableCell>
+                            <StyledTableCell align="left"><StyledButton endIcon={getButtonEndIcon("date",sortOptions.by, sortOptions.reverse)} onClick={(e) => handleSortByColumn("date")}><FormattedMessage id="date" /></StyledButton></StyledTableCell>
+                            <StyledTableCell align="left"><StyledButton endIcon={getButtonEndIcon("currency",sortOptions.by, sortOptions.reverse)} onClick={(e) => handleSortByColumn("currency")} ><FormattedMessage id="currency" /></StyledButton></StyledTableCell>
+                            <StyledTableCell align="left"><StyledButton endIcon={getButtonEndIcon("total",sortOptions.by, sortOptions.reverse)} onClick={(e) => handleSortByColumn("total")}><FormattedMessage id="total" /></StyledButton></StyledTableCell>
+                            <StyledTableCell align="left"><StyledButton endIcon={getButtonEndIcon("order",sortOptions.by, sortOptions.reverse)} onClick={(e) => handleSortByColumn("order")}><FormattedMessage id="order" /></StyledButton></StyledTableCell>
                             <StyledTableCell align="left"></StyledTableCell>
                             <StyledTableCell align="left"></StyledTableCell>
                         </TableRow>
@@ -110,7 +130,8 @@ const PayrollDataTable = (props: Props) => {
                     </TableBody>
                 </StyledTable>
             </TableContainer>
-            {payroll &&
+            {
+                payroll &&
                 <CustomPagination page={page} totalPage={getTotalPage([...payroll.payrolls].length, recordsPerPage)} totalRecord={[...payroll.payrolls].length} handleChangePage={handleChangePage} showing={getPageInfo(payroll, page, recordsPerPage)} />
             }
         </>

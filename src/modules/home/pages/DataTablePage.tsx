@@ -220,11 +220,11 @@ const DataTablePage = (props: Props) => {
                 </Grid>
             </Grid>
         </Grid>
-        <Modal
+
+        {modal.targetPayrollDetail ? <Modal
             open={modal.openViewDetail}
             onClose={() => setModal({ ...modal, openViewDetail: false, targetPayrollDetail: null })}
-        >
-            {modal.targetPayrollDetail ? <Fade in={modal.openViewDetail}>
+        ><Fade in={modal.openViewDetail}>
                 <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
                     <Grid
                         container
@@ -240,13 +240,13 @@ const DataTablePage = (props: Props) => {
                         <UpdatePayrollDetailForm successMessage={updateSuccessMessage} errorMessage={updateErrorMessage} loading={updateLoading} onUpdatePayrollDetail={handleConfirmUpdate} payrollDetail={modal.targetPayrollDetail} cancelModal={() => { setModal({ ...modal, openViewDetail: false }) }} />
                     </Grid>
                 </Container>
-            </Fade> : <></>}
-        </Modal>
-        <Modal
+            </Fade></Modal> : <></>}
+
+
+        {modal.targetPayrollDetail ? <Modal
             open={modal.openDelete}
             onClose={() => setModal({ ...modal, openDelete: false, targetPayrollDetail: null })}
-        >
-            {modal.targetPayrollDetail ? <Fade in={modal.openDelete}>
+        ><Fade in={modal.openDelete}>
                 <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
                     <Grid
                         container
@@ -270,9 +270,9 @@ const DataTablePage = (props: Props) => {
                         </Box>
                     </Grid>
                 </Container>
-            </Fade> : <></>}
+            </Fade></Modal> : <></>}
 
-        </Modal>
+
     </Grid >
 }
 export default DataTablePage
