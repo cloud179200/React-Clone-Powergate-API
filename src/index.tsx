@@ -1,3 +1,4 @@
+import { LocalizationProvider } from '@mui/lab';
 import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,6 +11,7 @@ import ConnectedIntlProvider from './modules/intl/component/ConnectedIntlProvide
 import { setLocale } from './modules/intl/redux/intlReducer';
 import configureStore, { history } from './redux/configureStore';
 import reportWebVitals from './reportWebVitals';
+import AdapterDateFns from "@mui/lab/AdapterDateFns"
 
 smoothscroll.polyfill();
 
@@ -22,9 +24,11 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ConnectedRouter history={history}>
-          <ConnectedIntlProvider defaultLocale='vi'>
-            <App />
-          </ConnectedIntlProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <ConnectedIntlProvider defaultLocale='vi'>
+              <App />
+            </ConnectedIntlProvider>
+          </LocalizationProvider>
         </ConnectedRouter>
       </PersistGate>
     </Provider>

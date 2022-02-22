@@ -1,6 +1,6 @@
 import { TextField, Typography, ListItem, ListItemAvatar, Avatar, Card, CardContent, CardMedia, Grid, CircularProgress } from "@mui/material";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { IPhoto } from "../../../models/photo";
+import { IPhoto } from "../../../models/data";
 import LazyLoad from 'react-lazyload'
 import { blue, grey } from "@mui/material/colors";
 

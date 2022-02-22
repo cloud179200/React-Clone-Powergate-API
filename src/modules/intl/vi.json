@@ -24,5 +24,18 @@
   "male":"Nam",
   "female":"Nữ",
   "User with this email has already existed":"Người dùng gán với địa chỉ email này đã tồn tại",
-  "Invalid username / password":"Địa chỉ email / mật khẩu không chính xác"
+  "Invalid username / password":"Địa chỉ email / mật khẩu không chính xác",
+  "dateInvalid":"Ngày không hợp lệ",
+  "dateRequire":"Chưa có ngày",
+  "from":"Từ",
+  "to":"Đến",
+  "status":"Trạng thái",
+  "statusInvalid":"Trạng thái không hợp lệ",
+  "order":"Mã yêu cầu",
+  "viewDetail":"Xem chi tiết",
+  "date":"Ngày tạo",
+  "currency":"Loại tiền",
+  "total":"Tổng cộng",
+  "fees":"Phí",
+  "amount":"Số lượng"
 }

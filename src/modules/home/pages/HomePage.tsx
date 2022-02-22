@@ -1,4 +1,4 @@
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Stack } from '@mui/material';
 import { useCallback } from 'react';
 import { AppState } from "../../../redux/reducer";
 import { useDispatch } from "react-redux";
@@ -24,7 +24,10 @@ const HomePage = (props: Props) => {
     dispatch(replace(ROUTES.tutorial))
   }, [dispatch])
   const handleMoveToUserDetail = useCallback(e => {
-    dispatch(replace(ROUTES.userdetail))
+    dispatch(replace(ROUTES.userDetail))
+  }, [dispatch])
+  const handleMoveToDataTable = useCallback(e => {
+    dispatch(replace(ROUTES.dataTable))
   }, [dispatch])
   return <Grid container direction="row"
     justifyContent="center"
@@ -33,10 +36,13 @@ const HomePage = (props: Props) => {
     height="100vh" columns={2}>
     <Grid container direction="row"
       justifyContent="space-evenly"
-      alignItems="center" width={1} maxWidth="600px" p={2} sx={{ border: `2px solid ${blue["A200"]}`, borderRadius: "20px" }} columns={12}>
-      <Button variant='outlined' onClick={handleLogout}>Logout</Button>
-      <Button variant='outlined' onClick={handleMoveToTutorial}>Move to tutorial</Button>
-      <Button variant='outlined' onClick={handleMoveToUserDetail}>Move to user detail</Button>
+      alignItems="center" maxWidth="1280px" p={2} sx={{ border: `2px solid ${blue["A200"]}`, borderRadius: "20px" }} columns={12}>
+      <Stack direction="row" spacing={4}>
+        <Button variant='outlined' onClick={handleLogout}>Logout</Button>
+        <Button variant='outlined' onClick={handleMoveToTutorial}>Move to tutorial</Button>
+        <Button variant='outlined' onClick={handleMoveToUserDetail}>Move to user detail</Button>
+        <Button variant='outlined' onClick={handleMoveToDataTable}>Move to data table</Button>
+      </Stack>
     </Grid>
   </Grid>;
 };
