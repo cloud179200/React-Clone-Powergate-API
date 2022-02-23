@@ -40,7 +40,7 @@ const Filter = (props: Props) => {
             return;
         }
         onApply(filter)
-    }, [filter  , onApply])
+    }, [filter, onApply])
     return <>
         <Stack direction="row" alignItems="center" justifyContent="flex-start" spacing={2}>
             <FormControl size="small" sx={{ minWidth: 150 }}>
@@ -79,8 +79,12 @@ const Filter = (props: Props) => {
                 inputFormat="dd/MM/yyyy"
             />
             <TextField sx={{ minWidth: 150 }} label={<><FormattedMessage id="order" />&nbsp;#</>} size='small' value={filter.order} onChange={(e: any) => {
+
                 setFilter({ ...filter, order: e.target.value })
-            }} variant="outlined" />
+                if (!e.target.value) {
+                    onClear()
+                }
+            }} variant="outlined" autoComplete="off" />
         </Stack>
         <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
             <Button variant="outlined" onClick={handleApply}>Apply</Button>

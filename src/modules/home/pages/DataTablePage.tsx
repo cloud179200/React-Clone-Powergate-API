@@ -33,7 +33,8 @@ const DataTablePage = (props: Props) => {
         let newPayrollDetails = [...newClonePayroll.payrolls]
         if (status) newPayrollDetails = newPayrollDetails.filter(payroll => getStatus(payroll).status === status);
         newPayrollDetails = newPayrollDetails.filter(payroll => (from <= new Date(payroll.time_created)) && (to >= new Date(payroll.time_created)) && true);
-        if (order) newPayrollDetails = newPayrollDetails.filter(payroll => payroll.payroll_id.indexOf(status) !== -1);
+        console.log(order)
+        if (order) newPayrollDetails = newPayrollDetails.filter(payroll => payroll.payroll_id.indexOf(order) !== -1);
         newClonePayroll.payrolls = newPayrollDetails;
         setClonePayroll({ ...newClonePayroll })
     }, [payroll])
@@ -221,7 +222,7 @@ const DataTablePage = (props: Props) => {
             </Grid>
         </Grid>
 
-        {modal.targetPayrollDetail ? <Modal
+        {modal.targetPayrollDetail && <Modal
             open={modal.openViewDetail}
             onClose={() => setModal({ ...modal, openViewDetail: false, targetPayrollDetail: null })}
         ><Fade in={modal.openViewDetail}>
@@ -240,10 +241,10 @@ const DataTablePage = (props: Props) => {
                         <UpdatePayrollDetailForm successMessage={updateSuccessMessage} errorMessage={updateErrorMessage} loading={updateLoading} onUpdatePayrollDetail={handleConfirmUpdate} payrollDetail={modal.targetPayrollDetail} cancelModal={() => { setModal({ ...modal, openViewDetail: false }) }} />
                     </Grid>
                 </Container>
-            </Fade></Modal> : <></>}
+            </Fade></Modal>}
 
 
-        {modal.targetPayrollDetail ? <Modal
+        {modal.targetPayrollDetail && <Modal
             open={modal.openDelete}
             onClose={() => setModal({ ...modal, openDelete: false, targetPayrollDetail: null })}
         ><Fade in={modal.openDelete}>
@@ -270,9 +271,7 @@ const DataTablePage = (props: Props) => {
                         </Box>
                     </Grid>
                 </Container>
-            </Fade></Modal> : <></>}
-
-
+            </Fade></Modal>}
     </Grid >
 }
 export default DataTablePage
