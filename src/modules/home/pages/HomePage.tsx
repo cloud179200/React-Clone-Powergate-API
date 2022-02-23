@@ -20,8 +20,8 @@ const HomePage = (props: Props) => {
     dispatch(removeUserInfo());
     dispatch(replace(ROUTES.login))
   }, [dispatch])
-  const handleMoveToTutorial = useCallback(e => {
-    dispatch(replace(ROUTES.tutorial))
+  const handleMoveToPhoto = useCallback(e => {
+    dispatch(replace(ROUTES.photo))
   }, [dispatch])
   const handleMoveToUserDetail = useCallback(e => {
     dispatch(replace(ROUTES.userDetail))
@@ -39,7 +39,7 @@ const HomePage = (props: Props) => {
       alignItems="center" maxWidth="1280px" p={2} sx={{ border: `2px solid ${blue["A200"]}`, borderRadius: "20px" }} columns={12}>
       <Stack direction="row" spacing={4}>
         <Button variant='outlined' onClick={handleLogout}>Logout</Button>
-        <Button variant='outlined' onClick={handleMoveToTutorial}>Move to tutorial</Button>
+        <Button variant='outlined' onClick={handleMoveToPhoto}>Move to photo</Button>
         <Button variant='outlined' onClick={handleMoveToUserDetail}>Move to user detail</Button>
         <Button variant='outlined' onClick={handleMoveToDataTable}>Move to data table</Button>
       </Stack>

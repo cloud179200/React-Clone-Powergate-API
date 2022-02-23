@@ -4,7 +4,7 @@ export const ROUTES = {
   auth: '/auth',
   login:"/login",
   register:"/register",
-  tutorial:"/tutorial",
+  photo:"/photo",
   userDetail:"/userdetail",
   dataTable:"/datatable"
 };

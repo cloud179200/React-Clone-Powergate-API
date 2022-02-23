@@ -14,7 +14,7 @@ import { ROUTES } from "../../../configs/routes"
 import { replace } from "connected-react-router"
 interface Props { }
 
-const TutorPage = (props: Props) => {
+const PhotoPage = (props: Props) => {
     const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>()
     const [loading, setLoading] = useState<boolean>(false)
     const [clonePhotos, setClonePhotos] = useState<IPhoto[]>([])
@@ -81,4 +81,4 @@ const TutorPage = (props: Props) => {
         </Grid>
     </Grid>;
 }
-export default TutorPage
+export default PhotoPage
